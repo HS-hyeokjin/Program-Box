@@ -7,8 +7,18 @@ import java.util.Random;
 public class Player {
 	static Scanner scanner = new Scanner(System.in);
 	
-	public String name;
-	public int card[] = {0,0,0};
+	private String name;
+	public int card[] = new int[3];
+
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 
 	public Player(String name) {
 		this.name = name;
@@ -17,6 +27,7 @@ public class Player {
 	public int Turnone() {                             //첫번째 턴 메소드
 		
 		return card[0] = (int) ((Math.random()*8)+1);
+		
 		
 	}
 	public int Turntwo() {                              //두번째 턴 메소드		
@@ -38,6 +49,7 @@ public class Player {
 		}
 		System.out.println();
 	}
-	
-}
+
+	}
+
 
