@@ -11,6 +11,10 @@ public class EighteenTest {
 		Player Dale = new Player("Dale");
 		Player Hana = new Player("Hana");
 		int temp;
+		int	Usersum = 0;
+		int Jacksum = 0;
+		int Dalesum = 0;
+		int Hanasum = 0;
 		boolean one = true;
 		boolean two = true;
 
@@ -156,7 +160,38 @@ public class EighteenTest {
 		Hana.Turnthree();
 		Hana.ShowCard();
 		
+    	System.out.println("\n\n\n\n 결과는... \n.\n.\n.\n");
 
+		for (int i = 0; i < User.card.length; i++) {
+			Usersum += User.card[i];
+			}
+		for (int i = 0; i < Jack.card.length; i++) {
+			Jacksum += Jack.card[i];
+			}
+		for (int i = 0; i < Dale.card.length; i++) {
+			Dalesum += Dale.card[i];
+			}
+		for (int i = 0; i < Hana.card.length; i++) {
+			Hanasum += Hana.card[i];
+			}
+		System.out.println("User       " + Usersum);
+		System.out.println("Jack       " + Jacksum);
+		System.out.println("Dale       " + Dalesum);
+		System.out.println("Hana       " + Hanasum+"\n\n\n\n");
+		
+		Usersum = Usersum - 18;
+		Jacksum = Jacksum - 18;
+		Dalesum = Dalesum - 18;
+		Hanasum = Hanasum - 18;
+		
+		if(Usersum > 0) {
+			System.out.println("패배 하였습니다.");
+		}
+		else if(Usersum > Jacksum && Usersum > Dalesum && Usersum > Hanasum) {
+			System.out.println("승리 하였습니다.");
+		}
+			else
+				System.out.println("비겼습니다.");
 		}
 	}
 
