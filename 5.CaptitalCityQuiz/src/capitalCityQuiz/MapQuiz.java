@@ -1,15 +1,15 @@
 package capitalCityQuiz;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Vector;
 
 public class MapQuiz {
-		private String name; 							// CityQuiz 프로그램의 이름
-		private Scanner scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
+	
 		private Vector<City> v;
 
-		public MapQuiz(String name) {
-			this.name = name;
+		public MapQuiz() {
 			
 			v = new Vector<>();
 			v.add(new City("한국", "서울"));
@@ -41,4 +41,83 @@ public class MapQuiz {
 			v.add(new City("핀란드", "헬싱키"));
 	
 		}
+
+		public void insert() {
+			System.out.println("X를 입력하면 입력을 종료합니다.");
+			while(true) {
+				System.out.print("국가 수도 입력 >> ");
+				String Contry = scanner.next(); 
+				if(Contry.equals("X"))
+					break;
+				
+				String City = scanner.next(); 
+				v.add(new City(Contry, City));
+			}		
+		}
+		
+		public void StartQuiz() {
+			System.out.println("현재 " + v.size() + "개의 국가가 들어 있습니다. X를 입력하면 테스트를 종료합니다.");
+			while(true) { 
+				int ex1 = (int)(Math.random()*v.size()); 			
+				String contry = v.get(ex1).getContry();				 
+				
+				int example[] = new int [4];
+				
+				int answerLoc = makeExample(example, ex1); 
+				example[answerLoc] = ex1;
+
+				System.out.println(contry + "?");
+				
+				for(int i=0; i<example.length; i++)
+					System.out.print("(" + (i+1) + ")" + v.get(example[i]).getCity() + " "); // 보기 출력
+				
+				
+				System.out.print(":>"); 
+				try {
+					int in = scanner.nextInt(); 
+					if(in == -1) 
+						break; 
+					
+					in--;
+					if(in == answerLoc)
+						System.out.println("Excellent !!");
+					else
+						System.out.println("No. !!");
+				}
+				catch(InputMismatchException e) {
+					scanner.next(); 
+					System.out.println("숫자를 입력하세요 !!");
+			
+				}
+			}		
+		}
+		
+		public int makeExample(int ex[], int answerIndex) {
+			int n[] = {-1, -1, -1, -1}; 
+			int index;
+			for(int i=0; i<n.length; i++) {
+				do {
+					index = (int)(Math.random()*v.size());
+				} while(index == answerIndex || exists (n, index)); // 다시 시도
+				n[i] = index;
+			}
+
+			for(int i=0; i<n.length; i++) ex[i] = n[i];
+			return (int)(Math.random()*n.length); 
+		}
+		
+		private boolean exists(int n[], int index) {
+			for(int i=0; i<n.length; i++) {
+				if(n[i] == index)
+					return true;
+			}
+			return false;
+		}
+		
+		
+		private void finish() {
+			System.out.println("프로그램을 종료합니다.");
+			scanner.close();
+		}
+		
 }
