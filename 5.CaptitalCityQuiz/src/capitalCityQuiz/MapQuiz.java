@@ -80,9 +80,9 @@ public class MapQuiz {
 					
 					in--;
 					if(in == answerLoc)
-						System.out.println("Excellent !!");
+						System.out.println("정답입니다.");
 					else
-						System.out.println("No. !!");
+						System.out.println("틀렸습니다.");
 				}
 				catch(InputMismatchException e) {
 					scanner.next(); 
@@ -113,11 +113,13 @@ public class MapQuiz {
 			}
 			return false;
 		}
-		
-		
-		private void finish() {
-			System.out.println("프로그램을 종료합니다.");
-			scanner.close();
+		public void view() {
+			for (int i = 0; i < v.size(); i++) {
+				System.out.println(v.get(i));
+				}
 		}
 		
+		public void finish() {
+			System.out.println("프로그램을 종료합니다.");
+		}
 }
